@@ -1,0 +1,12 @@
+streamlit
+streamlit-option-menu
+python-dotenv
+openai
+google-generativeai
+pypdf
+langchain_google_genai
+langchain-text-splitters
+langchain_community
+faiss_cpu
+sentence-transformers
+langchain-huggingface
