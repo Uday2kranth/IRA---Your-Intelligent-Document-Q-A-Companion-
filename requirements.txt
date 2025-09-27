@@ -3,10 +3,10 @@ streamlit-option-menu
 python-dotenv
 openai
 google-generativeai
-pypdf
+PyPDF2
 langchain_google_genai
 langchain-text-splitters
 langchain_community
-faiss_cpu
+faiss-cpu
 sentence-transformers
 langchain-huggingface

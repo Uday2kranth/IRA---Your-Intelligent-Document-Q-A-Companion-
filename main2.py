@@ -7,7 +7,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from streamlit_option_menu import option_menu
 from PyPDF2 import PdfReader
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from sentence_transformers import SentenceTransformer
 
 # st.set_page_config(page_title= "your  personal digit nurse", page_icon=":robot_face:")
 # st.title("healthMate AI")
@@ -94,12 +94,27 @@ def delete_file(user_id,file_name):
 init_db()
 
 
-# # Initialize embeddings model
-# from sentence_transformers import SentenceTransformer
-# embeddings = SentenceTransformer(model_name="all-MiniLM-L6-v2")
-embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-# embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
-# embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+# # Initialize embeddings model - Using SentenceTransformer instead of Google to avoid quota issues  
+# Using SentenceTransformer directly for more reliable embedding generation
+sentence_model = SentenceTransformer("all-MiniLM-L6-v2")
+
+# Create a wrapper to make SentenceTransformer compatible with LangChain
+class SentenceTransformerEmbeddings:
+    def __init__(self, model):
+        self.model = model
+    
+    def embed_documents(self, texts):
+        return self.model.encode(texts).tolist()
+    
+    def embed_query(self, query):
+        return self.model.encode([query])[0].tolist()
+    
+    # Add this method to make it compatible with FAISS
+    def __call__(self, text):
+        return self.embed_query(text)
+
+embeddings = SentenceTransformerEmbeddings(sentence_model)
+# embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")  # Disabled due to quota issues
 
 def get_chunks(text):
     from langchain_text_splitters import RecursiveCharacterTextSplitter

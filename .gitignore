@@ -1,15 +1,73 @@
 # Python
 __pycache__/
+*.py[cod]
 *.pyc
+*.pyo
+*.pyd
+.Python
 venv/
 IRA_env/
+env/
+ENV/
 
 # Ignore the 'projects-for-others' folder
 projects-for-others
+IRA---Your-Intelligent-Document-Q-A-Companion-/
+
+# Deployment folder (excluded from main project submission)
+deployment/
 
 # VS Code
 .vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.production
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# Local database and files
+IRA.db
+*.db
+*.sqlite
+*.sqlite3
+uploads/
+
+# Model cache and downloads
+.cache/
+sentence_transformers_cache/
+huggingface_hub/
+models/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# AI/ML model files (if they get large)
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Streamlit
+.streamlit/secrets.toml
